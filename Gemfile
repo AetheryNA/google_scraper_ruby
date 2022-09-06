@@ -19,6 +19,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows doe
 # Authentications & Authorizations
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
+# Templating
+gem 'slim' # light weight template engine
+
 # Assets
 gem 'sprockets-rails' # The original asset pipeline for Rails
 gem 'cssbundling-rails' # Bundle and process CSS
@@ -67,6 +70,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false # An extension of RuboCop focused on code performance checks.
   gem 'undercover' # Report missing test coverage in new changes
   gem 'danger' # Automated code review.
+  gem 'danger-slim_lint' # Lint slim files.
   gem 'danger-eslint' # ESLint
   gem 'danger-stylelint' # Stylelint
   gem 'danger-rubocop' # A Danger plugin for Rubocop.

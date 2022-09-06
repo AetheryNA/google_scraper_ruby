@@ -15,6 +15,15 @@ reek.lint
 # Suggests code changes in the PR
 suggester.suggest
 
+# Runs ESLint on modified and added files in the PR
+eslint.lint
+
+# Runs Stylelint on all files
+stylelint.lint
+
+# Runs slim-lint on modified and added files in the PR
+slim_lint.lint
+
 # Report your Ruby app test suite code coverage in Danger.
 simplecov.report 'coverage/coverage.json'
 

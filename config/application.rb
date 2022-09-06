@@ -40,5 +40,8 @@ module GoogleScraperRuby
 
     # Compress the responses to reduce the size of html/json controller responses.
     config.middleware.use Rack::Deflater
+
+    # Automatically generate the `translation.js` files
+    config.middleware.use I18n::JS::Middleware
   end
 end
