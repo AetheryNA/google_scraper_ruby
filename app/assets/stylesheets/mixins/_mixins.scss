@@ -1,0 +1,3 @@
+@mixin primary-gradient {
+  background: linear-gradient(90deg, $primary-light 0%, $primary 39%, $primary-dark 100%);
+}
