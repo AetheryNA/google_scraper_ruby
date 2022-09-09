@@ -17,8 +17,6 @@ env:
 
   # Set the default docker-compose file
   COMPOSE_FILE: docker-compose.test.yml
-    with:
-      access_token: ${{ github.token }}
 
 jobs:
   build:
@@ -44,13 +42,13 @@ jobs:
 
       - name: Pull Docker image
         if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
-        run: docker compose pull test || true
+        run: docker-compose pull test || true
 
       - name: Build Docker image
-        run: bin/docker-prepare && docker compose build
+        run: bin/docker-prepare && docker-compose build
 
       - name: Push Docker image
-        run: docker compose push test
+        run: docker-compose push test
 
   unit_tests:
     name: Unit tests
@@ -70,10 +68,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker compose pull test || true
+        run: docker-compose pull test || true
 
       - name: Run unit tests
-        run: docker compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
 
       - name: Upload tests coverage artifact
         uses: actions/upload-artifact@v3
@@ -99,10 +97,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker compose pull test || true
+        run: docker-compose pull test || true
 
       - name: Run system tests
-        run: docker compose run test bundle exec rspec spec/systems --profile
+        run: docker-compose run test bundle exec rspec spec/systems --profile
 
       - name: Upload system tests screenshots artifact
         uses: actions/upload-artifact@v2
@@ -113,11 +111,23 @@ jobs:
 
   automated_code_review:
     name: Run Danger
+    needs: unit_tests
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Download tests coverage artifact
+        uses: actions/download-artifact@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: test.yml
+          workflow_conclusion: success
+          name: coverage
+          path: coverage
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -125,26 +135,14 @@ jobs:
           bundler-cache: true
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.13.2'
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache Yarn
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
 
       - name: Cache Node modules
         id: node-modules-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
@@ -152,8 +150,11 @@ jobs:
             ${{ runner.os }}-nodemodules-
 
       - name: Yarn install
-        if: steps.yarn-cache.outputs.cache-hit != 'true' || steps.node-modules-cache.outputs.cache-hit != 'true'
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn
+
+      - name: Run Undercover
+        run: bundle exec undercover-report
 
       - name: Run Danger
         run: bundle exec danger
