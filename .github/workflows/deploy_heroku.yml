@@ -7,15 +7,16 @@ on:
     branches:
       - master
       - main
-      - development
+      - develop
     types:
       - completed
   workflow_dispatch:
 
 env:
+  DANGER_GITHUB_API_TOKEN: ${{ github.token }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
-  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_GITHUB_TOKEN }}
   DOCKER_IMAGE: ${{ github.repository }}
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
@@ -42,9 +43,9 @@ jobs:
         run: |
           if [[ $BRANCH_TAG = "latest" ]]
           then
-            echo "HEROKU_APP=google_scraper_ruby" >> $GITHUB_ENV
+            echo "HEROKU_APP=google-scraper-ruby" >> $GITHUB_ENV
           else
-            echo "HEROKU_APP=google_scraper_ruby-staging" >> $GITHUB_ENV
+            echo "HEROKU_APP=google-scraper-ruby-staging" >> $GITHUB_ENV
           fi
 
       - name: Login to Docker registry
