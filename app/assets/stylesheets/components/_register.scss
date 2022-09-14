@@ -1,0 +1,67 @@
+.register {
+  position: relative;
+  width: 100%;
+
+  &__wrapper {
+    padding: 30px 60px 20px;
+    background-color: $white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #e3e3e3, 0 0 10px #ffffff;
+    left: 50%;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  &__top {
+    margin-top: 10%;
+    text-align: center;
+  }
+
+  &__bottom {
+    margin-top: 20%;
+    text-align: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    button {
+      margin-top: 40px;
+    }
+  }
+
+  &__form-group {
+    margin-bottom: 20px;
+    width: 100%;
+
+    input {
+      border: unset;
+      border-bottom: 1px solid $black;
+      text-align: center;
+      outline: unset;
+      width: 100%;
+
+      &:focus {
+        border-color: $primary-dark;
+      }
+    }
+
+    label {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__account-login {
+    margin-top: 20%;
+
+    span,
+    a {
+      font-weight: 200;
+      font-size: 0.875rem;
+    }
+  }
+}
