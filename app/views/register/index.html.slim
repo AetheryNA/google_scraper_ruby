@@ -4,7 +4,11 @@ section class="register"
       h4 Welcome!
       h3 Register to Continue 
     div class="register__bottom"
-      = form_with(model: @user, local: true) do |form|
+      = form_with(model: @user, local: true, url: register_path) do |form|
+        = if @user.errors.any?
+          div class="alert alert-danger"
+            = @user.errors.full_messages.each do |message|
+              p #{message}
         div class="register__form-group"
           = form.label ('Username')
           = form.text_field :username, required: true
@@ -15,7 +19,7 @@ section class="register"
 
         div class="register__form-group"
           = form.label ('Confirm Password')
-          = form.password_field :password_confirm, required: true
+          = form.password_field :password_confirmation, required: true
 
         = form.submit ('Sign up'), class: "button button--primary"
       div class="register__account-login"
