@@ -1,0 +1,23 @@
+section class="register"
+  div class="register__wrapper"
+    div class="register__top"
+      h4 Welcome!
+      h3 Register to Continue 
+    div class="register__bottom"
+      = form_with(model: @user, local: true) do |form|
+        div class="register__form-group"
+          = form.label ('Username')
+          = form.text_field :username, required: true
+
+        div class="register__form-group"
+          = form.label ('Password')
+          = form.password_field :password, required: true
+
+        div class="register__form-group"
+          = form.label ('Confirm Password')
+          = form.password_field :password_confirm, required: true
+
+        = form.submit ('Sign up'), class: "button button--primary"
+      div class="register__account-login"
+        span Have an account? &nbsp;
+        a href="/" Sign in
