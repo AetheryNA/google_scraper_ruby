@@ -17,7 +17,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows doe
 # gem 'bcrypt' # Use Active Model has_secure_password
 
 # Authentications & Authorizations
+gem 'devise' # Authentication for Ruby Application
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
+gem 'doorkeeper' # OAuth2 for enabling authentication on Mobile Applications
 
 # Templating
 gem 'slim' # light weight template engine
