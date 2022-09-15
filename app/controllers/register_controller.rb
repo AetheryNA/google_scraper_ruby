@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegisterController < ApplicationController
   layout 'auth'
 
@@ -9,15 +11,15 @@ class RegisterController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to root_path, Notice: "Successfully created Account"
+      redirect_to root_path, Notice: 'Successfully created Account'
     else
       render :index
     end
   end
 
-  private 
+  private
 
-    def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation)
+  end
 end
