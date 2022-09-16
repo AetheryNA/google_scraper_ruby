@@ -1,0 +1,30 @@
+.button {
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 55px;
+  transition: $basic-transition;
+  width: 100%;
+
+  &--primary {
+    @include primary-gradient-background;
+    
+    border: unset;
+    color: $white-500;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $black-100;
+    }
+  }
+
+  &--secondary {
+    border: 1px solid $primary-dark;
+    color: $black-100;
+
+    &:hover {
+      background-color: $primary-dark;
+      color: $white-500;
+    }
+  }
+}
