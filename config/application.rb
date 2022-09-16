@@ -38,6 +38,12 @@ module GoogleScraperRuby
     # Prefix the queue name of all jobs with Rails ENV
     config.active_job.queue_name_prefix = Rails.env
 
+    # Gives Devise a layout to apply before render
+    config.to_prepare do
+      Devise::SessionsController.layout "auth"
+      Devise::RegistrationsController.layout "auth"
+    end
+
     # Compress the responses to reduce the size of html/json controller responses.
     config.middleware.use Rack::Deflater
 
