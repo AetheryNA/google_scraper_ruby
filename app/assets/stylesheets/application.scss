@@ -8,11 +8,16 @@
 @import './functions';
 
 // Mixins
+@import './mixins/animations';
+@import './mixins/background';
 
 // Base
+@import './base/buttons';
 
 // Layouts
+@import './layouts/base';
 
 // Components
+@import './components/auth-form';
 
 // Screens
