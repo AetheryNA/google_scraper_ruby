@@ -6,8 +6,9 @@ html class="layout-authentication"
     == csp_meta_tag
 
     == stylesheet_link_tag 'application'
-    == javascript_include_tag '/assets/application'
+    == javascript_include_tag 'application'
 
   body
     main class="d-flex justify-content-center vh-100 p-3"
+      = render 'shared/flash_messages'
       == yield
