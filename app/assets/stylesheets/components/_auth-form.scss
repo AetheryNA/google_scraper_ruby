@@ -38,6 +38,7 @@
       border: 0;
       outline: 0;
       border-bottom: 1px solid $primary;
+      width: 100%;
 
       &:focus {
         border-color: $primary-dark;
@@ -49,8 +50,17 @@
       font-style: italic;
     }
 
+    em {
+      color: $primary;
+      font-size: 0.825rem;
+    }
+
     &--checkbox {
       flex-direction: row;
+
+      input {
+        width: unset;
+      }
 
       label {
         margin-left: 10px;
