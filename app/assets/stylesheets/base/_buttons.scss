@@ -1,13 +1,13 @@
 .button {
-  padding: 10px 0;
-  text-align: center;
-  border-radius: 55px;
-  transition: $basic-transition;
   width: 100%;
+  padding: 10px 0;
+  transition: $basic-transition;
+  border-radius: 55px;
+  text-align: center;
 
   &--primary {
     @include primary-gradient-background;
-    
+
     border: unset;
     color: $white-500;
     font-weight: 600;

@@ -1,16 +1,16 @@
 .auth-form {
-  margin: auto 0;
-  max-width: 450px;
   width: 100%;
+  max-width: 450px;
+  margin: auto 0;
 
   &__wrapper {
-    padding: 40px 50px 20px;
-    align-items: center;
-    background-color: $white-500;
-    box-shadow:  0 0 10px #dbdbdb, 0 0 10px #ffffff;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 40px 50px 20px;
+    border-radius: 10px;
+    background-color: $white-500;
+    box-shadow: 0 0 10px #dbdbdb, 0 0 10px #fff;
   }
 
   &__top,
@@ -29,16 +29,16 @@
   }
 
   &__field {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 
     input {
+      width: 100%;
       padding: 5px;
       border: 0;
-      outline: 0;
       border-bottom: 1px solid $primary;
-      width: 100%;
+      outline: 0;
 
       &:focus {
         border-color: $primary-dark;

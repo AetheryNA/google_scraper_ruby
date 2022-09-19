@@ -1,12 +1,12 @@
 .error {
   h2,
   li {
-    color: red;
+    color: $red;
     font-style: italic;
   }
 
   h2 {
-    font-size: 1rem
+    font-size: 1rem;
   }
 
   li {
