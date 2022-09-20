@@ -6,8 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :email, format: URI::MailTo::EMAIL_REGEXP
-
   # the authenticate method from devise documentation
   def self.authenticate(email, password)
     password_param = password
