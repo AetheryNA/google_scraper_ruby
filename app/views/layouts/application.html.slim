@@ -1,0 +1,13 @@
+doctype html
+html class="layout-default"
+  head
+    title Google Scraper
+    == csrf_meta_tags
+    == csp_meta_tag
+
+    == stylesheet_link_tag 'application'
+    == javascript_include_tag 'application'
+
+  body
+    main
+      == yield
