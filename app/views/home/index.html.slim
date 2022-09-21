@@ -1,12 +1,7 @@
-h1 class="home__title" Welcome to the Home page
-p Your awesome!
+section class='home'
+  div class='container'
+    h1 class="home__title" Welcome #{current_user.email}
+    h3 Google Scraper
+    p We scrape data from Google based on your CSV data!
 
-- if user_signed_in?
-  p #{current_user.email}
-  = button_to 'Logout', destroy_user_session_path, method: :delete
-
-- else
-  = link_to 'Login', new_user_session_path,
-    class: 'button button--secondary'
-  = link_to 'Sign up', new_user_registration_path,
-    class: 'button button--primary'
+  div class='home__rendered'
