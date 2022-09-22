@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP
 
+  has_many :keywords, dependent: :destroy
+
   # the authenticate method from devise documentation
   def self.authenticate(email, password)
     password_params = password
