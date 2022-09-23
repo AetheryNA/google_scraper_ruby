@@ -11,9 +11,9 @@ class KeywordsFormValidator < ActiveModel::Validator
 
   def validate_file
     if !keywords_file
-      add_error('Invalid file, please upload a CSV file')
-    elsif !evalid_extension
-      add_error('Invalid extension, only CSV files are allowed')
+      add_error('Upload a file')
+    elsif !valid_extension
+      add_error('Only CSV files are accepted')
     end
   end
 
@@ -26,6 +26,6 @@ class KeywordsFormValidator < ActiveModel::Validator
   end
 
   def valid_extension
-    keywords_file.content_type = 'text/csv'
+    keywords_file.content_type == 'text/csv'
   end
 end
