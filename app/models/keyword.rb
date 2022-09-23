@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Keyword < ApplicationRecord
-  belongs_to :users
+  belongs_to :user
 
   validates :keyword, presence: true
 
