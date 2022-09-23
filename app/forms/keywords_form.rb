@@ -1,12 +1,13 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 require 'csv'
 
 class KeywordsForm
   include ActiveModel::Model
 
-  attr_reader :file
-  attr_reader :user
+  validates_with KeywordsFormValidator
+
+  attr_reader :file, :user
 
   def initialize(user)
     @user = user
@@ -15,16 +16,17 @@ class KeywordsForm
   def save(csv_file)
     @file = csv_file
 
-    puts parse_keywords
+    begin
+      keyword_records = parse_keywords.map { |keyword| add_keyword_record(keyword) }
 
-    parse_keywords.each do |keyword|
-      Keyword.insert({
-        users_id: user.id,
-        keywords: keyword,
-        created_at: Time.current,
-        updated_at: Time.current
-      })
+      # rubocop:disable Rails::SkipsModelValidations
+      @keyword_ids = Keyword.insert_all(keyword_records).map { |keyword| keyword['id'] }
+      # rubocop:enable Rails::SkipsModelValidations
+    rescue ActiveRecord::ActiveRecordError
+      errors.add(keywords.upload)
     end
+
+    errors.empty?
   end
 
   private
@@ -32,5 +34,16 @@ class KeywordsForm
   def parse_keywords
     csv_data = CSV.read(file)
     csv_data.map(&:first)
+  end
+
+  def add_keyword_record(keyword)
+    return nil if keyword.blank?
+
+    {
+      users_id: user.id,
+      keywords: keyword,
+      created_at: Time.current,
+      updated_at: Time.current
+    }
   end
 end
