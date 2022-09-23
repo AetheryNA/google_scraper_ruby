@@ -40,8 +40,8 @@ class KeywordsForm
     return nil if keyword.blank?
 
     {
-      users_id: user.id,
-      keywords: keyword,
+      user_id: user.id,
+      keyword: keyword,
       created_at: Time.current,
       updated_at: Time.current
     }

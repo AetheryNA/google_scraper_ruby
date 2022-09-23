@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2022_09_21_084715) do
   enable_extension "plpgsql"
 
   create_table "keywords", force: :cascade do |t|
-    t.string "keywords", null: false
+    t.string "keyword", null: false
     t.integer "status", default: 0, null: false
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_keywords_on_users_id"
+    t.index ["user_id"], name: "index_keywords_on_user_id"
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -64,6 +64,6 @@ ActiveRecord::Schema.define(version: 2022_09_21_084715) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "keywords", "users", column: "users_id"
+  add_foreign_key "keywords", "users"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end
