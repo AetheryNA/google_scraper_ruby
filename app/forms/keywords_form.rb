@@ -16,7 +16,7 @@ class KeywordsForm
   def save(csv_file)
     @file = csv_file
 
-    return false unless valid?
+    return false if invalid?
 
     begin
       keyword_records = parse_keywords.map { |keyword| add_keyword_record(keyword) }
@@ -25,7 +25,7 @@ class KeywordsForm
       @insert_keywords = Keyword.insert_all(keyword_records).map { |keyword| keyword['id'] }
       # rubocop:enable Rails::SkipsModelValidations
     rescue ActiveRecord::ActiveRecordError
-      errors.add('Error')
+      errors.add('Invalid File')
     end
 
     errors.empty?
