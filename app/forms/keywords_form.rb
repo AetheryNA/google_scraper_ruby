@@ -19,11 +19,7 @@ class KeywordsForm
     return false if invalid?
 
     begin
-      keyword_records = parse_keywords.map { |keyword| add_keyword_record(keyword) }
-
-      # rubocop:disable Rails::SkipsModelValidations
-      @insert_keywords = Keyword.insert_all(keyword_records).map { |keyword| keyword['id'] }
-      # rubocop:enable Rails::SkipsModelValidations
+      save_keywords_to_db
     rescue ActiveRecord::ActiveRecordError
       errors.add('Invalid File')
     end
@@ -32,6 +28,14 @@ class KeywordsForm
   end
 
   private
+
+  def save_keywords_to_db
+    keyword_records = parse_keywords.map { |keyword| add_keyword_record(keyword) }
+
+    # rubocop:disable Rails::SkipsModelValidations
+    @insert_keywords = Keyword.insert_all(keyword_records).map { |keyword| keyword['id'] }
+    # rubocop:enable Rails::SkipsModelValidations
+  end
 
   def parse_keywords
     csv_data = CSV.read(file)
@@ -43,9 +47,7 @@ class KeywordsForm
 
     {
       user_id: user.id,
-      keyword: keyword,
-      created_at: Time.current,
-      updated_at: Time.current
+      keyword: keyword
     }
   end
 end
