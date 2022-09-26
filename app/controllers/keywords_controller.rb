@@ -10,7 +10,7 @@ class KeywordsController < ApplicationController
 
   def create
     if keywords_parse_csv
-      flash[:notice] = 'Upload Successful!'
+      flash[:notice] = I18n.t('csv.upload_success')
     else
       flash[:alert] = keywords_form.errors.full_messages.first
     end

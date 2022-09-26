@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  csv:
+    upload_success: 'Your file has been uploaded!'
+    upload_fail_missing_file: 'Upload a file to continue'
+    upload_fail_invalid_extention: 'Only CSV files can be uploaded'
+    upload_fail_invalid_size: 'Please upload a file with 1 - 1000 words'
