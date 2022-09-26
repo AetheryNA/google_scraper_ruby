@@ -9,13 +9,19 @@ class KeywordsController < ApplicationController
   end
 
   def create
-    keywords_parse_csv
+    if keywords_parse_csv
+      flash[:notice] = 'Upload Successful!'
+    else
+      flash[:alert] = keywords_form.errors.full_messages.first
+    end
+
+    redirect_to keywords_path
   end
 
   private
 
   def keywords_form
-    @keyword_form = KeywordsForm.new(current_user)
+    @keywords_form ||= KeywordsForm.new(current_user)
   end
 
   def keywords_parse_csv

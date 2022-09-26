@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class KeywordsFormValidator < ActiveModel::Validator
-  def validate(form)
-    @form = form
+  def validate(keywords_form)
+    @keywords_form = keywords_form
 
     validate_file
+
+    puts keywords_form.errors.full_messages
   end
 
-  attr_reader :form
+  attr_reader :keywords_form
 
   def validate_file
     if !keywords_file
@@ -18,11 +20,11 @@ class KeywordsFormValidator < ActiveModel::Validator
   end
 
   def add_error(message)
-    form.errors.add(message)
+    keywords_form.errors.add(:base, message)
   end
 
   def keywords_file
-    form.file
+    keywords_form.file
   end
 
   def valid_extension
