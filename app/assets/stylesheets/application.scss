@@ -13,6 +13,7 @@
 
 // Base
 @import './base/buttons';
+@import './base/animations';
 
 // Layouts
 @import './layouts/base';
@@ -20,5 +21,8 @@
 // Components
 @import './components/auth-form';
 @import './components/errors';
+@import './components/header';
+@import './components/keywords';
+@import './components/keywords-form';
 
 // Screens
