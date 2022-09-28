@@ -7,7 +7,7 @@ class KeywordsForm
 
   validates_with KeywordsFormValidator
 
-  attr_reader :file, :user
+  attr_reader :file, :user, :insert_keywords
 
   def initialize(user)
     @user = user

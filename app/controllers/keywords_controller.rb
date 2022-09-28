@@ -10,6 +10,12 @@ class KeywordsController < ApplicationController
 
   def create
     if keywords_parse_csv
+      # find_keyword = Keyword.find(keywords_form.insert_keywords)
+
+      # google_search_service(find_keyword[0].keyword).call
+
+      SearchKeywordsJob.perform_later(keywords_form.insert_keywords)
+
       flash[:notice] = I18n.t('csv.upload_success')
     else
       flash[:alert] = keywords_form.errors.full_messages.first
