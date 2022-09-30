@@ -7,9 +7,9 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 15px;
     position: relative;
+    grid-gap: 15px;
+    grid-template-columns: 1fr;
 
     @include media-breakpoint-up(sm) {
       grid-template-columns: 1fr 1fr;
@@ -40,8 +40,8 @@
     }
 
     button {
-      padding: 5px 10px;
       width: auto;
+      padding: 5px 10px;
       font-size: 0.75rem;
     }
   }
@@ -51,15 +51,15 @@
     justify-content: space-between;
 
     span {
-      font-style: italic;
       color: $grey-300;
       font-size: 0.875rem;
+      font-style: italic;
     }
   }
 
   &__status {
     &--complete {
-      color: #1C6758;
+      color: #1c6758;
     }
 
     &--failed {
@@ -74,24 +74,24 @@
       }
 
       circle {
-        fill: none;
-        stroke: #fc2f70;
+        animation: dash 1.5s ease-in-out infinite;
         stroke-width: 5;
+        stroke-linecap: round;
         stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;
-        stroke-linecap: round;
-        animation: dash 1.5s ease-in-out infinite;
+        stroke: #fc2f70;
+        fill: none;
       }
     }
   }
 
   &__line {
     @include secondary-gradient-background--1;
+    position: absolute;
+    bottom: 0;
 
     left: 0;
-    bottom: 0;
-    position: absolute;
-    height: 3px;
     width: 100%;
+    height: 3px;
   }
 }

@@ -5,7 +5,6 @@ class KeywordsController < ApplicationController
 
   def index
     @keywords = Keyword.all
-    @keyword = Keyword.new
   end
 
   def create

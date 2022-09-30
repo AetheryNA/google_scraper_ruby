@@ -3,7 +3,8 @@
     = render 'shared/flash_messages'
 
     .keywords-form__upload
-      p Upload a CSV File
+      p Upload CSV Here
+      = form.label :keywords_file, 'Click me to upload a file', class: 'keywords-form__file-upload'
       = form.file_field :keywords_file, accept: 'text/csv', required: true, multipart: true
 
     .keywords-form__submit
