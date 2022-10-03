@@ -19,8 +19,10 @@ section.keywords
             class: 'button button--secondary header__logout'
 
     .keywords__bottom
+      = render 'shared/flash_messages'
+
       = render 'upload_csv_form', keyword: @keyword
 
       .keywords__line.keywords__line--1
 
-    == render partial: 'keyword_table', locals: { keywords: keywords }
+    = render 'keyword_table', keywords: keywords
