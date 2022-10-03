@@ -23,4 +23,4 @@ section.keywords
 
       .keywords__line.keywords__line--1
 
-    = render 'keyword_table'
+    == render partial: 'keyword_table', locals: { keywords: keywords }

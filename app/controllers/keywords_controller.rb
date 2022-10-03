@@ -4,7 +4,11 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @keywords = current_user.keywords
+    keywords = current_user.keywords
+
+    render locals: {
+      keywords: keywords
+    }
   end
 
   def create
