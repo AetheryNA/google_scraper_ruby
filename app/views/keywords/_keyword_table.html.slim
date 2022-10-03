@@ -2,24 +2,24 @@ section.keywords-table
   h2 Keyword Cards
 
   .keywords-table__grid
-    - @keywords.each_with_index do |current_user_keyword, index|
+    - @keywords.each_with_index do |keyword, index|
       .card.keywords-table__card
         .card-body.keywords-table__card-body
           .keywords-table__data
             span
               '##{index + 1}
 
-            - if current_user_keyword.status == 'completed'
+            - if keyword.status == 'completed'
               .keywords-table__status.keywords-table__status--complete &#10003;
-            - if current_user_keyword.status == 'in_progress'
+            - if keyword.status == 'in_progress'
               .keywords-table__status.keywords-table__status--in-progress
                 svg viewBox="25 25 50 50"
                   circle cx="50" cy="50" r="20"
-            - if current_user_keyword.status == 'failed'
+            - if keyword.status == 'failed'
               .keywords-table__status.keywords-table__status--failed &#9587;
 
           h5.card-title.keywords-table__card-title
-            = current_user_keyword.keyword
+            = keyword.keyword
 
           p.keywords-table__no-of-ads Ads(Top position): 20
           p.keywords-table__total-ads Total Ads: 60
