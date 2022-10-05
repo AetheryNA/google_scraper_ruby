@@ -1,8 +1,8 @@
 .button {
   width: 100%;
-  padding: 10px 0;
+  padding: rem(10px) 0;
   transition: $basic-transition;
-  border-radius: 55px;
+  border-radius: rem(55px);
   text-align: center;
 
   &--primary {
@@ -19,7 +19,7 @@
   }
 
   &--secondary {
-    border: 1px solid $primary-dark;
+    border: rem(1px) solid $primary-dark;
     color: $black-100;
 
     &:hover {
