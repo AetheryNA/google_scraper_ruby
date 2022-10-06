@@ -36,7 +36,7 @@ module GoogleScraperRuby
     config.active_job.queue_adapter = :sidekiq
 
     # Prefix the queue name of all jobs with Rails ENV
-    config.active_job.queue_name_prefix = Rails.env
+    config.active_job.queue_name_prefix = nil
 
     # Gives Devise a layout to apply before render
     config.to_prepare do
