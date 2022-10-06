@@ -7,9 +7,9 @@ class SearchKeywordJob < ApplicationJob
     keyword = Keyword.find(keyword_id)
 
     begin
-      GoogleSearchService.new(keyword: keyword.keyword).call
+      response = GoogleSearchService.new(keyword: keyword.keyword).call
 
-      keyword.update_status(:completed)
+      save_keyword_results(response, GoogleParseService.new(html: response))
     rescue ActiveRecord::RecordNotFound, ActiveRecord::StatementInvalid
       keyword.update_status(:failed)
     end
@@ -18,4 +18,10 @@ class SearchKeywordJob < ApplicationJob
   private
 
   attr_reader :keyword
+
+  def save_keyword_results(html, parse_service)
+    Keyword.transaction do
+      keyword.update_result(html: html, parse_service: parse_service, status: :completed)
+    end
+  end
 end
