@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_071120) do
+ActiveRecord::Schema.define(version: 2022_10_07_040433) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
 
   create_table "keywords", force: :cascade do |t|
@@ -27,6 +28,15 @@ ActiveRecord::Schema.define(version: 2022_10_06_071120) do
     t.integer "total_links_count"
     t.text "html"
     t.index ["user_id"], name: "index_keywords_on_user_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.citext "url", null: false
+    t.integer "link_type", null: false
+    t.bigint "keyword_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["keyword_id"], name: "index_links_on_keyword_id"
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -70,5 +80,6 @@ ActiveRecord::Schema.define(version: 2022_10_06_071120) do
   end
 
   add_foreign_key "keywords", "users"
+  add_foreign_key "links", "keywords"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end
