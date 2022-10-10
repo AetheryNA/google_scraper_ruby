@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+#
+# If there is no OAuth application created, create them
+if Doorkeeper::Application.count.zero?
+  Doorkeeper::Application.create(name: "Client Application", redirect_uri: "", scopes: "")
+end
