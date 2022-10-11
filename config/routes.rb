@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-   resources :keywords, only: [:index, :create]
+   resources :keywords, only: [:index, :create, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "/keywords", to: "keywords#index"
 

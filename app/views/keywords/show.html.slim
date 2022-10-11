@@ -1,7 +1,12 @@
 p[style='color: green']
   = notice
-= render @keyword
 div
-  = link_to 'Edit this keyword', edit_keyword_path(@keyword)
+  = presenter.name
+  = presenter.created_at
+  = presenter.ads_top_count
+  = presenter.non_ads_count
+  = presenter.total_links_count
+  = presenter.status
+
   = link_to 'Back to keywords', keywords_path
   = button_to 'Destroy this keyword', @keyword, method: :delete
