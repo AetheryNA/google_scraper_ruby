@@ -1,0 +1,97 @@
+.keywords-table {
+  margin: 60px 0 120px;
+
+  h2 {
+    margin-bottom: 60px;
+  }
+
+  &__grid {
+    display: grid;
+    position: relative;
+    grid-gap: 15px;
+    grid-template-columns: 1fr;
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  &__card {
+    @include neumorphism-block-cards;
+
+    background-color: $white-100;
+  }
+
+  &__card-body {
+    padding-top: 0.5rem;
+
+    p {
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+
+    button {
+      width: auto;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+    }
+  }
+
+  &__data {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      color: $grey-300;
+      font-size: 0.875rem;
+      font-style: italic;
+    }
+  }
+
+  &__status {
+    &--complete {
+      color: #1c6758;
+    }
+
+    &--failed {
+      color: $primary-dark;
+    }
+
+    &--in-progress {
+      svg {
+        width: 20px;
+        transform-origin: center;
+        animation: rotate 2s linear infinite;
+      }
+
+      circle {
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke: #fc2f70;
+        fill: none;
+      }
+    }
+  }
+
+  &__line {
+    @include secondary-gradient-background--1;
+    position: absolute;
+    bottom: 0;
+
+    left: 0;
+    width: 100%;
+    height: 3px;
+  }
+}

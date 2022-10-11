@@ -1,0 +1,30 @@
+section.keywords-table
+  h2 Keyword Cards
+
+  .keywords-table__grid
+    - keywords.each_with_index do |keyword, index|
+      .card.keywords-table__card
+        .card-body.keywords-table__card-body
+          .keywords-table__data
+            span
+              '##{index + 1}
+
+            - if keyword.status == 'completed'
+              .keywords-table__status.keywords-table__status--complete &#10003;
+            - if keyword.status == 'in_progress'
+              .keywords-table__status.keywords-table__status--in-progress
+                svg viewBox="25 25 50 50"
+                  circle cx="50" cy="50" r="20"
+            - if keyword.status == 'failed'
+              .keywords-table__status.keywords-table__status--failed &#9587;
+
+          h5.card-title.keywords-table__card-title
+            = keyword.keyword
+
+          p.keywords-table__no-of-ads Ads(Top position): 20
+          p.keywords-table__total-ads Total Ads: 60
+          p.keywords-table__total-non-ads Total non-Ads: 80
+          p.keywords-table__total-links Total Links: 100
+          button.keywords-table__html.button.button--secondary RAW HTML
+
+          .keywords-table__line

@@ -19,8 +19,10 @@ section.keywords
             class: 'button button--secondary header__logout'
 
     .keywords__bottom
-      = render 'upload-csv-form', keyword: @keyword
+      = render 'shared/flash_messages'
 
-      #keywords
-        - @keywords.each do |keyword|
-          = render keyword
+      = render 'upload_csv_form', keyword: @keyword
+
+      .keywords__line.keywords__line--1
+
+    = render 'keyword_table', keywords: keywords

@@ -26,9 +26,27 @@
   &__upload {
     padding: 15px;
 
-    input {
-      margin-bottom: 20px;
+    p {
+      font-size: 0.875rem;
     }
+
+    input {
+      display: none;
+    }
+  }
+
+  &__file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 120px;
+    border: 2px dashed $grey-300;
+    color: $grey-300;
+    font-size: 0.875rem;
+    font-style: italic;
+    text-transform: uppercase;
+    cursor: pointer;
   }
 
   &__submit {
@@ -39,8 +57,11 @@
       width: 100%;
       height: 30px;
       border: unset;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
       background-color: $pink;
       color: $white-100;
+      text-transform: uppercase;
     }
   }
 }

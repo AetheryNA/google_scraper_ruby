@@ -4,8 +4,11 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @keywords = Keyword.all
-    @keyword = Keyword.new
+    keywords = current_user.keywords
+
+    render locals: {
+      keywords: keywords
+    }
   end
 
   def create
@@ -27,6 +30,6 @@ class KeywordsController < ApplicationController
   end
 
   def keywords_parse_csv
-    keywords_form.save(params[:keyword][:keywords_file])
+    keywords_form.save(params[:keywords_file])
   end
 end
