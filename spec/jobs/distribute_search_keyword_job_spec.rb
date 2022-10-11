@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SearchKeywordsJob, type: :job do
+RSpec.describe DistributeSearchKeywordJob, type: :job do
   include ActiveJob::TestHelper
 
   describe '#perform' do

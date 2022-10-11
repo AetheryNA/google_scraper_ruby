@@ -13,7 +13,7 @@ class KeywordsController < ApplicationController
 
   def create
     if keywords_parse_csv
-      SearchKeywordsJob.perform_later(keywords_form.insert_keywords)
+      DistributeSearchKeywordJob.perform_later(keywords_form.insert_keywords)
 
       flash[:notice] = I18n.t('csv.upload_success')
     else
