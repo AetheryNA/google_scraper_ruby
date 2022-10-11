@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class GoogleParseService
-  TOP_ADS_SELECTOR = '#tads > div'
-  ADS_PAGE_COUNT_SELECTOR = '.pla-unit-container'
-  TOP_ADS_URL_SELECTOR = '#tads > div a[data-ved]'
+  TOP_POS_ADS_SELECTOR = '#tads > div'
+  ADS_ON_PAGE_COUNT_SELECTOR = '.pla-unit-container'
+  TOP_POS_ADS_URL_SELECTOR = '#tads > div a[data-ved]'
   NON_ADS_COUNT_SELECTOR = 'a[data-ved] > h3'
 
   def initialize(html:)
@@ -14,11 +14,11 @@ class GoogleParseService
   attr_reader :html, :document
 
   def ads_top_count
-    @ads_top_count ||= document.css(TOP_ADS_SELECTOR).count
+    @ads_top_count ||= document.css(TOP_POS_ADS_SELECTOR).count
   end
 
   def ads_page_count
-    ads_top_count + document.css(ADS_PAGE_COUNT_SELECTOR).count
+    ads_top_count + document.css(ADS_ON_PAGE_COUNT_SELECTOR).count
   end
 
   def non_ads_count
@@ -30,7 +30,7 @@ class GoogleParseService
   end
 
   def ads_top_urls
-    document.css(TOP_ADS_URL_SELECTOR).map { |a_tag| a_tag['href'] }
+    document.css(TOP_POS_ADS_URL_SELECTOR).map { |a_tag| a_tag['href'] }
   end
 
   def non_ads_urls

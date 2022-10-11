@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SearchKeywordsJob < ApplicationJob
+class DistributeSearchKeywordJob < ApplicationJob
   queue_as :default
 
   def perform(keyword_ids)
