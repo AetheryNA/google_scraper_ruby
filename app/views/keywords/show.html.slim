@@ -12,10 +12,8 @@ section.show-keyword
           = presenter.status
 
       .show-keyword__links
-        = link_to 'Back to keywords', keywords_path,
-          class:'show-keyword__link-back'
         = button_to 'Delete', @keyword, method: :delete,
-          class:'show-keyword__delete button button--secondary'
+          class:'show-keyword__button button button--secondary'
 
     .show-keyword__line
 
@@ -23,11 +21,11 @@ section.show-keyword
       .show-keyword__details
         .show-keyword__card.show-keyword__card--1
           h3 #{presenter.ads_top_count}
-          span All advertisements on the top of the page
+          span Advertisements on the top of the page
 
         .show-keyword__card.show-keyword__card--2
           h3 #{presenter.non_ads_count}
-          span All non-advertisements on the page
+          span Non-advertisements on the page
 
         .show-keyword__card.show-keyword__card--3
           h3 #{presenter.total_links_count}
@@ -40,3 +38,7 @@ section.show-keyword
       .show-keyword__url-table
         h4 Non AD URLs
         = render 'keyword_url_table', urls: presenter.non_ads_urls
+
+      .show-keyword__html
+        h4 Raw HTML
+        iframe srcdoc="#{presenter.raw_html}" width='100%' height='400px'

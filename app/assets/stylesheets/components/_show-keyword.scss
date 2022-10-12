@@ -89,15 +89,16 @@
 
   &__links {
     margin-top: auto;
+    display: flex;
+    max-width: 125px;
+    width: 100%;
+
+    form {
+      width: 100%;
+    }
   }
 
-  &__link-back {
-    margin-bottom: rem(20px);
-    display: block;
-    text-align: right;
-  }
-
-  &__delete {
+  &__button {
     padding: rem(5px);
     font-size: rem(12px);
   }
@@ -109,9 +110,17 @@
     h4 {
       margin-top: 40px;
     }
+  }
 
-    &:last-child {
+  &__html {
+    margin-top: 40px;
+
+    h4 {
       margin-bottom: 40px;
+    }
+
+    iframe {
+      margin-bottom: 50px;
     }
   }
 }
