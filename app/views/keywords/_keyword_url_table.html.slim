@@ -1,0 +1,12 @@
+- if urls.present?
+  table.table.keyword-url-table
+    thead
+      tr
+        th scope='col' #
+        th scope='col' URL
+    tbody
+      - urls.each_with_index do |url, index|
+        tr
+          th scope='row' #{index + 1}
+          td
+            a href="#{url}" #{url}
