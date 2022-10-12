@@ -7,6 +7,14 @@ class KeywordPresenter
 
   attr_reader :keyword
 
+  delegate :ads_top_count, to: :keyword
+
+  delegate :ads_page_count, to: :keyword
+
+  delegate :non_ads_count, to: :keyword
+
+  delegate :total_links_count, to: :keyword
+
   def name
     keyword.keyword
   end
