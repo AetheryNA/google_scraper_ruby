@@ -28,6 +28,11 @@
     @include neumorphism-block-cards;
 
     background-color: $white-100;
+    transition: $basic-transition;
+
+    &:hover {
+      transform: scale(1.04);
+    }
   }
 
   &__card-body {
@@ -43,6 +48,11 @@
       width: auto;
       padding: 5px 10px;
       font-size: 0.75rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: $black-100;
     }
   }
 
