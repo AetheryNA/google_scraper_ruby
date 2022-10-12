@@ -23,6 +23,15 @@ class KeywordsController < ApplicationController
     redirect_to keywords_path
   end
 
+  def show
+    keyword = current_user.keywords.find_by(id: params[:id])
+    presenter = KeywordPresenter.new(keyword)
+
+    render locals: {
+      presenter: presenter
+    }
+  end
+
   private
 
   def keywords_form
