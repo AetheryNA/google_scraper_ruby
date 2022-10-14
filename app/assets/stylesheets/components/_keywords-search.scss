@@ -1,0 +1,23 @@
+.keywords-search {
+  position: relative;
+
+  p {
+    margin-bottom: 5px;
+    font-size: rem(14px);
+    font-style: italic;
+    color: $grey-300;
+  }
+
+  &__search-field {
+    border: 0;
+    outline: 0;
+    border-radius: 55px;
+    padding: 10px 30px 10px 20px;
+    color: $black-100;
+    font-size: rem(14px);
+  }
+
+  &__button {
+    display: none;
+  }
+}
