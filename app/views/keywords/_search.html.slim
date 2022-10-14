@@ -1,0 +1,3 @@
+= form_with url: keywords_path, method: :get do |form|
+  = form.text_field :keyword, placeholder: 'Enter keyword here', class: 'search-field'
+  = form.submit 'Click', class: 'search-button'

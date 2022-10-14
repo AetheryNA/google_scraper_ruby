@@ -1,5 +1,7 @@
 section.keywords-table
-  h2 Keyword Cards
+  .keywords-table__header
+    h2 Keyword Cards
+    = render 'search'
 
   .keywords-table__grid
     - keywords.each_with_index do |keyword, index|
@@ -11,7 +13,7 @@ section.keywords-table
 
             - if keyword.status == 'completed'
               .keywords-table__status.keywords-table__status--complete &#10003;
-            - if keyword.status == 'in_progress'
+            - if keyword.status == 'in progress'
               .keywords-table__status.keywords-table__status--in-progress
                 svg viewBox="25 25 50 50"
                   circle cx="50" cy="50" r="20"
@@ -19,6 +21,6 @@ section.keywords-table
               .keywords-table__status.keywords-table__status--failed &#9587;
 
           h5.card-title.keywords-table__card-title
-            = link_to keyword.keyword, keyword_path(keyword.id)
+            = link_to keyword.name, keyword_path(keyword.id)
 
           .keywords-table__line
