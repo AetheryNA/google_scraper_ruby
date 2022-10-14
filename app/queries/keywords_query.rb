@@ -15,7 +15,7 @@ class KeywordsQuery
   end
 
   def filtered_keywords
-    query = "%#{filter_by_keyword}"
+    query = "%#{filter_by_keyword}%"
     keywords.where('keyword ILIKE ?', query)
   end
 end
