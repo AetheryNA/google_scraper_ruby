@@ -19,6 +19,6 @@ section.keywords-table
               .keywords-table__status.keywords-table__status--failed &#9587;
 
           h5.card-title.keywords-table__card-title
-            = keyword.keyword
+            = link_to keyword.keyword, keyword_path(keyword.id)
 
           .keywords-table__line

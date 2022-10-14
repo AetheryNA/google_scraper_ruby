@@ -11,6 +11,8 @@ class GoogleSearchService
 
   def call
     HTTParty.get(@uri, { headers: { 'User-Agent' => user_agent } })
+
+    # TODO: Create a function that will look for google links and replace them with the image
   end
 
   private

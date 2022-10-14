@@ -1,12 +1,40 @@
-p[style='color: green']
-  = notice
-div
-  = presenter.name
-  = presenter.created_at
-  = presenter.ads_top_count
-  = presenter.non_ads_count
-  = presenter.total_links_count
-  = presenter.status
+section.show-keyword
+  .container
+    p[style='color: green']
+      = notice
 
-  = link_to 'Back to keywords', keywords_path
-  = button_to 'Destroy this keyword', @keyword, method: :delete
+    .show-keyword__header
+      .show-keyword__title
+        span Keyword
+        h1 #{presenter.name}
+        span created at: #{presenter.created_at}
+        .show-keyword__status class="show-keyword__status--#{presenter.status}"
+          = presenter.status
+
+    .show-keyword__line
+
+    .show-keyword__stats
+      .show-keyword__details
+        .show-keyword__card.show-keyword__card--1
+          h3 #{presenter.ads_top_count}
+          span Advertisements on the top of the page
+
+        .show-keyword__card.show-keyword__card--2
+          h3 #{presenter.non_ads_count}
+          span Non-advertisements on the page
+
+        .show-keyword__card.show-keyword__card--3
+          h3 #{presenter.total_links_count}
+          span Total links on the page
+
+      .show-keyword__url-table
+        h4 AD URLs
+        = render 'keyword_url_table', urls: presenter.ads_top_urls
+
+      .show-keyword__url-table
+        h4 Non AD URLs
+        = render 'keyword_url_table', urls: presenter.non_ads_urls
+
+      .show-keyword__html
+        h4 Raw HTML
+        iframe srcdoc="#{presenter.raw_html}" width='100%' height='400px'
