@@ -15,6 +15,10 @@ class KeywordPresenter
 
   delegate :total_links_count, to: :keyword
 
+  def id
+    keyword.id
+  end
+
   def name
     keyword.keyword
   end

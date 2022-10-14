@@ -4,10 +4,12 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    keywords = current_user.keywords
+    keywords_query.call
+    keywords = keywords_query.keywords
+    keywords_presenter = keywords.map{ |keyword| KeywordPresenter.new(keyword) }
 
     render locals: {
-      keywords: keywords
+      keywords_presenter: keywords_presenter
     }
   end
 
@@ -40,5 +42,13 @@ class KeywordsController < ApplicationController
 
   def keywords_parse_csv
     keywords_form.save(params[:keywords_file])
+  end
+
+  def keywords_query
+    @keywords_query ||= KeywordsQuery.new(current_user.keywords, permitted_params)
+  end
+
+  def permitted_params
+    params.permit(:keyword)
   end
 end
