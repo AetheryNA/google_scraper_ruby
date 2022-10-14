@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class KeywordsQuery
   def initialize(keywords, filters)
     @keywords = keywords

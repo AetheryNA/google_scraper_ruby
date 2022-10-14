@@ -6,7 +6,7 @@ class KeywordsController < ApplicationController
   def index
     keywords_query.call
     keywords = keywords_query.keywords
-    keywords_presenter = keywords.map{ |keyword| KeywordPresenter.new(keyword) }
+    keywords_presenter = keywords.map { |keyword| KeywordPresenter.new(keyword) }
 
     render locals: {
       keywords_presenter: keywords_presenter
