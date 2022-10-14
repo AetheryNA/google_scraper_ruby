@@ -26,9 +26,9 @@
 
   &__card {
     @include neumorphism-block-cards;
+    transition: $basic-transition;
 
     background-color: $white-100;
-    transition: $basic-transition;
 
     &:hover {
       transform: scale(1.04);
@@ -51,8 +51,8 @@
     }
 
     a {
-      text-decoration: none;
       color: $black-100;
+      text-decoration: none;
     }
   }
 

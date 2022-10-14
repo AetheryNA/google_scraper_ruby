@@ -11,10 +11,6 @@ section.show-keyword
         .show-keyword__status class="show-keyword__status--#{presenter.status}"
           = presenter.status
 
-      .show-keyword__links
-        = button_to 'Delete', @keyword, method: :delete,
-          class:'show-keyword__button button button--secondary'
-
     .show-keyword__line
 
     .show-keyword__stats
