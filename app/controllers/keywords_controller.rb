@@ -4,8 +4,12 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @keywords = Keyword.all
-    @keyword = Keyword.new
+    keywords = current_user.keywords
+    keyword_presenters = keywords.map { |keyword| KeywordPresenter.new(keyword) }
+
+    render locals: {
+      keyword_presenter: keyword_presenters
+    }
   end
 
   def create
