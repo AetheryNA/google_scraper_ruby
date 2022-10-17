@@ -2,7 +2,7 @@ input {
   width: 100%;
   padding: rem(5px);
   border: 0;
-  border-bottom: rem(1px) solid $primary;
+  border-bottom: 1px solid $primary;
   outline: 0;
 
   &:focus {
