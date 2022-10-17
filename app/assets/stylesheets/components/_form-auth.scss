@@ -1,4 +1,4 @@
-.auth-form {
+.form-auth {
   width: 100%;
   max-width: rem(450px);
   margin: auto 0;
@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: rem($_auth-form-pads);
+    padding: $_auth-form-pads;
     border-radius: rem(10px);
     background-color: $white-500;
     box-shadow: 0 0 rem(10px) #dbdbdb, 0 0 rem(10px) #fff;

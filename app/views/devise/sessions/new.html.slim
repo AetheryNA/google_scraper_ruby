@@ -1,29 +1,29 @@
-section class='auth-form'
-  div class='auth-form__wrapper'
-    div class='auth-form__header'
+section class='form-auth'
+  div class='form-auth__wrapper'
+    div class='form-auth__header'
       h4 Welcome!
       h2 Login to continue
 
-    div class='auth-form__body'
+    div class='form-auth__body'
       = render 'devise/shared/error_messages', resource: resource
 
       = form_for(resource, as: resource_name,
         url: session_path(resource_name)) do |f|
-        div class='auth-form__field'
+        div class='form-auth__field'
           = f.label :email
           = f.email_field :email, autofocus: true, autocomplete: 'email'
 
-        div class='auth-form__field'
+        div class='form-auth__field'
           = f.label :password
           = f.password_field :password, autocomplete: 'current-password'
 
         - if devise_mapping.rememberable?
-          div class='auth-form__field auth-form__field--checkbox'
+          div class='form-auth__field form-auth__field--checkbox'
             = f.check_box :remember_me
             = f.label :remember_me
 
-        div class='auth-form__actions'
+        div class='form-auth__actions'
           = f.submit 'Login', class: 'button button--primary'
 
-      div class='auth-form__links'
+      div class='form-auth__links'
         = render 'devise/shared/links'
