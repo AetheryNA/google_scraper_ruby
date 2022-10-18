@@ -32,9 +32,7 @@ class KeywordsForm
   def save_keywords_to_db
     keyword_records = parse_keywords.map { |keyword| add_keyword_record(keyword) }
 
-    # rubocop:disable Rails::SkipsModelValidations
-    @insert_keywords = Keyword.insert_all(keyword_records).map { |keyword| keyword['id'] }
-    # rubocop:enable Rails::SkipsModelValidations
+    SaveKeywordsToDb.new(keyword_records).call
   end
 
   def parse_keywords

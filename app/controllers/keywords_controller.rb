@@ -13,7 +13,9 @@ class KeywordsController < ApplicationController
   end
 
   def create
-    if keywords_parse_csv
+    keywords_form ||= KeywordsForm.new(current_user)
+
+    if keywords_form.save(keyword_params)
       flash[:notice] = I18n.t('csv.upload_success')
     else
       flash[:alert] = keywords_form.errors.full_messages.first
@@ -24,11 +26,7 @@ class KeywordsController < ApplicationController
 
   private
 
-  def keywords_form
-    @keywords_form ||= KeywordsForm.new(current_user)
-  end
-
-  def keywords_parse_csv
-    keywords_form.save(params[:keyword][:keywords_file])
+  def keyword_params
+    params.require(:keywords_file)
   end
 end

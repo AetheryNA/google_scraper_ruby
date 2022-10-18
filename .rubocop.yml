@@ -31,6 +31,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/MethodLength:
+  Max: 15
+
 Style/FormatStringToken:
   EnforcedStyle: template
 
