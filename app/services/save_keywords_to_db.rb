@@ -9,7 +9,7 @@ class SaveKeywordsToDb
 
   def call
     # rubocop:disable Rails::SkipsModelValidations
-    @insert_keywords = Keyword.insert_all(keyword_records).map { |keyword| keyword['id'] }
+    Keyword.create(keyword_records).map { |keyword| keyword['id'] }
     # rubocop:enable Rails::SkipsModelValidations
   end
 end

@@ -19,9 +19,11 @@ class KeywordsForm
     return false if invalid?
 
     begin
-      save_keywords_to_db
-    rescue ActiveRecord::ActiveRecordError
-      errors.add('Invalid File')
+      if parse_keywords_from_file
+        save_keywords_to_db(parse_keywords_from_file)
+      end
+    rescue ActiveRecord::ActiveRecordError => error
+      errors.add("Error: #{error}")
     end
 
     errors.empty?
@@ -29,9 +31,11 @@ class KeywordsForm
 
   private
 
-  def save_keywords_to_db
-    keyword_records = parse_keywords.map { |keyword| add_keyword_record(keyword) }
+  def parse_keywords_from_file
+    parse_keywords.map { |keyword| add_keyword_record(keyword) }
+  end
 
+  def save_keywords_to_db(keyword_records)
     SaveKeywordsToDb.new(keyword_records).call
   end
 

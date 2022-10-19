@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe KeywordsForm, type: :form do
   describe '#save' do
-    context 'given a valid file it' do
+    context 'given a valid file' do
       it 'does NOT add an error' do
         form = save_file('valid.csv')
         expect(form.errors).to be_empty
