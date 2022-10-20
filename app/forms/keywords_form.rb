@@ -7,23 +7,19 @@ class KeywordsForm
 
   validates_with KeywordsFormValidator
 
-  attr_reader :file, :user
+  attr_accessor :file, :user, :keywords
 
-  def initialize(user)
-    @user = user
-  end
-
-  def save(csv_file)
-    @file = csv_file
+  def save(params)
+    assign_attributes(params)
 
     return false if invalid?
 
     begin
-      if parse_keywords_from_file
-        save_keywords_to_db(parse_keywords_from_file)
+      if parse_keywords(params[:file])
+        Keyword.create(parse_keywords_from_file(keywords)).map { |keyword| keyword['id'] }
       end
-    rescue ActiveRecord::ActiveRecordError => error
-      errors.add("Error: #{error}")
+    rescue ActiveRecord::ActiveRecordError => e
+      errors.add("Error: #{e}")
     end
 
     errors.empty?
@@ -31,17 +27,13 @@ class KeywordsForm
 
   private
 
-  def parse_keywords_from_file
-    parse_keywords.map { |keyword| add_keyword_record(keyword) }
+  def parse_keywords_from_file(keyword_records)
+    keyword_records.map { |keyword| add_keyword_record(keyword) }
   end
 
-  def save_keywords_to_db(keyword_records)
-    SaveKeywordsToDb.new(keyword_records).call
-  end
-
-  def parse_keywords
+  def parse_keywords(file)
     csv_data = CSV.read(file)
-    csv_data.map(&:first)
+    assign_attributes(keywords: csv_data.map(&:first).compact_blank)
   end
 
   def add_keyword_record(keyword)
