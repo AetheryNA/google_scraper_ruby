@@ -1,23 +1,25 @@
 # frozen_string_literal: true
 
 class KeywordsQuery
-  def initialize(keywords, filters)
-    @keywords = keywords
-    @filters = filters
+  def initialize(relation, filter_params)
+    @relation = relation
+    @filter = filter_params
   end
 
-  attr_reader :keywords, :filters
+  attr_reader :relation, :filter
 
   def call
-    @keywords = filtered_keywords if filter_by_keyword.present?
+    return Keyword.none unless filter
+
+    scope = exclude_html_column(relation)
+    scope = filter_by_keywords(scope) if filter[:keyword].present?
   end
 
-  def filter_by_keyword
-    filters[:keyword]
+  def exclude_html_column(scope)
+    scope.select(Keyword.column_names.excluding('html'))
   end
 
-  def filtered_keywords
-    query = "%#{filter_by_keyword}%"
-    keywords.where('keyword ILIKE ?', query)
+  def filter_by_keywords(scope)
+    scope.where('keyword ILIKE ?', filter[:keyword])
   end
 end
