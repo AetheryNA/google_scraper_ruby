@@ -1,0 +1,36 @@
+section class='form-auth'
+  div class='form-auth__wrapper'
+    div class='form-auth__header'
+      h4 Welcome!
+      h2 Sign up to use the Application
+
+    div class='form-auth__body'
+      = render 'devise/shared/error_messages',
+        resource: resource
+
+      = form_for(resource, as: resource_name,
+        url: registration_path(resource_name)) do |f|
+        div class='form-auth__field'
+          = f.label :email
+          = f.email_field :email,
+            autofocus: true,
+            autocomplete: 'email'
+
+        div class='form-auth__field'
+          = f.label :password
+          - if @minimum_password_length
+            em #{ @minimum_password_length } characters minimum
+          = f.password_field :password,
+            autocomplete: 'new-password'
+
+        div class='form-auth__field'
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation,
+            autocomplete: 'new-password'
+
+        div class='form-auth__actions'
+          = f.submit 'Sign up',
+            class: 'button button--primary'
+
+      div class='form-auth__links'
+        = render 'devise/shared/links'

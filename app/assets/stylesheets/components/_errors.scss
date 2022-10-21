@@ -1,0 +1,15 @@
+.error {
+  h2,
+  li {
+    color: $red;
+    font-style: italic;
+  }
+
+  h2 {
+    font-size: rem(16px);
+  }
+
+  li {
+    font-size: rem(14px);
+  }
+}
