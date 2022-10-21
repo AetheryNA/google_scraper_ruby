@@ -19,11 +19,7 @@ class KeywordsForm
     return false if invalid?
 
     begin
-      if parse_keywords(params[:file])
-        Keyword.transaction do
-          Keyword.create(parse_keywords_from_file(keywords)).pluck(:id)
-        end
-      end
+      Keyword.create(parse_keywords_from_file(keywords)).map { |keyword| keyword['id'] } if parse_keywords(params[:file])
     rescue ActiveRecord::ActiveRecordError => e
       errors.add("Error: #{e}")
     end
