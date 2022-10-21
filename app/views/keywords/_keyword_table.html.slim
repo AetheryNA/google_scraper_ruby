@@ -1,6 +1,9 @@
 section.keywords-table
   .keywords-table__header
     h2 Keyword Cards
+    - if url_count
+      p Url Count: #{url_count}
+
     = render 'search'
 
   .keywords-table__grid

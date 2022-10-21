@@ -8,7 +8,8 @@ class KeywordsController < ApplicationController
     keywords_presenter = results.map { |keyword| KeywordPresenter.new(keyword) }
 
     render locals: {
-      keywords_presenter: keywords_presenter
+      keywords_presenter: keywords_presenter,
+      url_count: keywords_query.count_matching_urls
     }
   end
 

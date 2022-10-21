@@ -18,6 +18,12 @@ class KeywordsQuery
     scope
   end
 
+  def count_matching_urls
+    return nil unless filter[:url]
+
+    filtered_urls.count
+  end
+
   def exclude_html_column(scope)
     scope.select(Keyword.column_names.excluding('html'))
   end
