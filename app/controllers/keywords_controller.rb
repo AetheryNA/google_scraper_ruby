@@ -49,6 +49,6 @@ class KeywordsController < ApplicationController
   end
 
   def indexable_params
-    params.permit([:keyword, :url, :link_type])
+    params.permit(%i[keyword url])
   end
 end

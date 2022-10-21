@@ -3,28 +3,36 @@
 require 'rails_helper'
 
 RSpec.describe KeywordsQuery, type: :query do
-  context 'given empty keywords list and no filter' do
-    it 'returns an empty keywords list' do
-      user = Fabricate(:user)
+  describe '#call' do
+    context 'given a user with no keywords' do
+      it 'returns an empty selection' do
+        query = described_class.new(Fabricate(:user).keywords, {})
 
-      keyword_query = described_class.new(user.keywords, {})
-
-      keyword_query.call
-
-      expect(keyword_query.keywords).to be_empty
+        expect(query.call).to be_empty
+      end
     end
-  end
 
-  context 'given a keywords list' do
-    it 'returns a keyword' do
-      user = Fabricate(:user)
+    context 'given a user with 3 keywords' do
+      it 'returns 3 keywords' do
+        user = Fabricate(:user)
+        Fabricate.times(3, :keyword, user: user)
 
-      (1.day.ago.to_date..Time.zone.today).each_with_index { |date, index| Fabricate(:keyword, id: index, user: user, created_at: date) }
-      keyword_query = described_class.new(user.keywords, {})
+        query = described_class.new(user.keywords, {})
 
-      keyword_query.call
+        expect(query.call.length).to eq(3)
+      end
+    end
 
-      expect(keyword_query.keywords.map(&:id)).to eq([0, 1])
+    context 'given a user with keywords and a word to query' do
+      it 'returns the keyword with relevance to the search' do
+        user = Fabricate(:user)
+
+        %w[Random Genshin Honkai].each { |name| Fabricate(:keyword, user: user, keyword: name) }
+
+        query = described_class.new(user.keywords, { keyword: 'gens', url: '' })
+
+        expect(query.call.map(&:keyword)).to eq(%w[Genshin])
+      end
     end
   end
 end
