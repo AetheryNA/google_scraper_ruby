@@ -18,10 +18,6 @@ class KeywordsQuery
     scope
   end
 
-  def order_by_name(scope)
-    scope.order(:keyword)
-  end
-
   def exclude_html_column(scope)
     scope.select(Keyword.column_names.excluding('html'))
   end
@@ -31,6 +27,10 @@ class KeywordsQuery
   end
 
   def filter_by_url(scope)
+    scope.where(links: filtered_urls)
+  end
+
+  def filtered_urls
     link = Link.where(keyword: relation)
     link = link.where('url ~* ?', filter[:url]) if filter[:url].present?
 

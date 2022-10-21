@@ -4,11 +4,8 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    keywords_presenter = current_user.keywords.map { |keyword| KeywordPresenter.new(keyword) }
-
-    puts 'Keyword search query:', params[:keyword]
-    puts 'URL search query:', params[:url]
-    puts keywords_query.call
+    results = keywords_query.call
+    keywords_presenter = results.map { |keyword| KeywordPresenter.new(keyword) }
 
     render locals: {
       keywords_presenter: keywords_presenter
