@@ -13,6 +13,13 @@ class KeywordsQuery
 
     scope = exclude_html_column(relation)
     scope = filter_by_keywords(scope) if filter[:keyword].present?
+    scope = filter_by_url(scope) if filter[:url].present?
+
+    scope
+  end
+
+  def order_by_name(scope)
+    scope.order(:keyword)
   end
 
   def exclude_html_column(scope)
@@ -20,6 +27,13 @@ class KeywordsQuery
   end
 
   def filter_by_keywords(scope)
-    scope.where('keyword ILIKE ?', filter[:keyword])
+    scope.where('keyword ~* ?', filter[:keyword])
+  end
+
+  def filter_by_url(scope)
+    link = Link.where(keyword: relation)
+    link = link.where('url ~* ?', filter[:url]) if filter[:url].present?
+
+    link
   end
 end
