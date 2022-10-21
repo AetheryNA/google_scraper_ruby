@@ -1,14 +1,32 @@
 .keywords-table {
   margin: 60px 0 120px;
 
-  h2 {
-    margin-bottom: 60px;
+  &__title {
+    margin-bottom: 15px;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 60px;
+    }
+
+    p {
+      color: $grey-300;
+      font-size: rem(14px);
+    }
+
+    span {
+      color: $black-100;
+    }
   }
 
   &__header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+    }
 
     form {
       width: auto;

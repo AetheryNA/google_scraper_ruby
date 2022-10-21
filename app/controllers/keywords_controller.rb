@@ -4,8 +4,7 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    results = keywords_query.call
-    keywords_presenter = results.map { |keyword| KeywordPresenter.new(keyword) }
+    keywords_presenter = keywords_query.call.map { |keyword| KeywordPresenter.new(keyword) }
 
     render locals: {
       keywords_presenter: keywords_presenter,
