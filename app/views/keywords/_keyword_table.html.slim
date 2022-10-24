@@ -1,8 +1,9 @@
 section.keywords-table
   .keywords-table__header
-    h2 Keyword Cards
-    - if url_count
-      p Url Count: #{url_count}
+    .keywords-table__title
+      h2 Keyword Cards
+      - if url_count
+        p Url Count: <span> #{url_count} </span>
 
     = render 'search'
 
