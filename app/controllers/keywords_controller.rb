@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class KeywordsController < ApplicationController
+  include Pagy::Backend
+
   before_action :authenticate_user!
 
   def index
-    keywords_presenter = keywords_query.call.map { |keyword| KeywordPresenter.new(keyword) }
+    pagy, keywords_presenter = pagy_array(keywords_query.call.map { |keyword| KeywordPresenter.new(keyword) })
 
     render locals: {
+      pagy: pagy,
       keywords_presenter: keywords_presenter,
       url_count: keywords_query.count_matching_urls
     }
