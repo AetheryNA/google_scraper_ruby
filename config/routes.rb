@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     devise_for :users
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: :create
+    end
+  end
+
   # Defines the root path route ("/")
   root "keywords#index"
 end
