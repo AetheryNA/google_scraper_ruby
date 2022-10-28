@@ -18,6 +18,8 @@ RSpec.configure do |config|
   # Set `true` for using in System test
   config.use_transactional_fixtures = true
 
+  config.include OAuthHelpers
+
   config.infer_spec_type_from_file_location!
 
   config.include Rails.application.routes.url_helpers
