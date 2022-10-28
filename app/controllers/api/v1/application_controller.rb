@@ -1,4 +1,6 @@
-module API
+# frozen_string_literal: true
+
+module Api
   module V1
     class ApplicationController < ActionController::API
       # equivalent of authenticate_user! on devise, but this one will check the oauth token
