@@ -19,8 +19,7 @@ class KeywordsForm
     return false if invalid?
 
     begin
-      parse_keywords
-      # save_keywords_to_db
+      save_keywords_to_db
     rescue ActiveRecord::ActiveRecordError
       errors.add('Invalid File')
     end
