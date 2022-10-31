@@ -20,6 +20,8 @@ RSpec.configure do |config|
 
   config.include OAuthHelpers
 
+  config.include FileUploadHelpers::Request
+
   config.infer_spec_type_from_file_location!
 
   config.include Rails.application.routes.url_helpers

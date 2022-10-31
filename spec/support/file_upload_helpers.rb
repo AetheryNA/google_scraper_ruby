@@ -15,6 +15,14 @@ module FileUploadHelpers
       form
     end
   end
+
+  module Request
+    def keywords_file_params(file_name)
+      path = Rails.root.join('spec', 'fixtures', 'files', file_name)
+
+      { keywords_file: Rack::Test::UploadedFile.new(path, 'text/csv', true) }
+    end
+  end
 end
 
 RSpec.configure do |config|
