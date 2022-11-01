@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :registrations, only: [:index, :create]
-      resources :keywords, only: [:index, :create]
+      resources :keywords, only: :create
     end
   end
 
