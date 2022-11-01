@@ -3,6 +3,10 @@
 module Api
   module V1
     class KeywordsController < ApplicationController
+      def index
+        render json: KeywordSerializer.new(current_user.keywords)
+      end
+
       def create
         if keywords_parse_csv
           render json: { message: I18n.t('csv.upload') }, status: :created
