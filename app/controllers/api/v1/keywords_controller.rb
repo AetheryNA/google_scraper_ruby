@@ -4,18 +4,16 @@ module Api
   module V1
     class KeywordsController < ApplicationController
       def index
-        render(json: {
-                 data: current_user
-               })
+        render json: KeywordSerializer.new(current_user.keywords)
       end
 
       def create
         if keywords_parse_csv
-          render json: success_response, status: :created
+          DistributeSearchKeywordJob.perform_later(keywords_form.insert_keywords)
+
+          render json: { message: I18n.t('csv.upload_success') }, status: :created
         else
-          render(json: {
-                   message: keywords_form.errors.full_messages.first
-                 })
+          render json: { message: keywords_form.errors.full_messages.first }
         end
       end
 
@@ -27,12 +25,6 @@ module Api
 
       def keywords_parse_csv
         keywords_form.save(params[:keywords_file])
-      end
-
-      def success_response
-        {
-          message: I18n.t('csv.upload_success')
-        }
       end
     end
   end
