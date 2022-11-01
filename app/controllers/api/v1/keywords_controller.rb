@@ -9,7 +9,9 @@ module Api
 
       def create
         if keywords_parse_csv
-          render json: { message: I18n.t('csv.upload') }, status: :created
+          DistributeSearchKeywordJob.perform_later(keywords_form.insert_keywords)
+
+          render json: { message: I18n.t('csv.upload_success') }, status: :created
         else
           render json: { message: keywords_form.errors.full_messages.first }
         end
