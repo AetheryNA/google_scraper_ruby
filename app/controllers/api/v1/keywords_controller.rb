@@ -3,8 +3,17 @@
 module Api
   module V1
     class KeywordsController < ApplicationController
+      include ::Pagy::Backend
+      include Api::V1::Pagy::JsonapiConcern
+
       def index
-        render json: KeywordSerializer.new(current_user.keywords)
+        pagy, keywords_list = pagy_array(keywords_query.call.map { |keyword| KeywordPresenter.new(keyword) })
+
+        options = pagy_options(pagy)
+
+        options[:meta] = options[:meta].merge(url_match_count: keywords_query.count_matching_urls)
+
+        render json: KeywordSerializer.new(keywords_list, options)
       end
 
       def create
@@ -25,6 +34,14 @@ module Api
 
       def keywords_parse_csv
         keywords_form.save(params[:keywords_file])
+      end
+
+      def keywords_query
+        @keywords_query ||= KeywordsQuery.new(current_user.keywords, indexable_params)
+      end
+
+      def indexable_params
+        params.permit(%i[keyword url])
       end
     end
   end

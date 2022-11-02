@@ -25,6 +25,10 @@ class KeywordPresenter
     keyword.created_at.strftime('%F %H:%M:%S')
   end
 
+  def updated_at
+    keyword.updated_at.strftime('%F %H:%M:%S')
+  end
+
   def raw_html
     keyword.html
   end
