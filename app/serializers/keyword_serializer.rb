@@ -8,5 +8,5 @@ class KeywordSerializer
 
   attribute :html, if: proc { |_, params| params[:show] }
 
-  has_many :result_links, if: proc { |_, params| params[:show] }
+  has_many :links, if: proc { |_, params| params[:show] }
 end
