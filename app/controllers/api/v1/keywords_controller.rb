@@ -26,6 +26,12 @@ module Api
         end
       end
 
+      def show
+        keyword = current_user.keywords.find show_params[:id]
+
+        render json: KeywordSerializer.new(keyword, include: [:links], params: { show: true })
+      end
+
       private
 
       def keywords_form
@@ -42,6 +48,10 @@ module Api
 
       def indexable_params
         params.permit(%i[keyword url])
+      end
+
+      def show_params
+        params.permit(:id)
       end
     end
   end
