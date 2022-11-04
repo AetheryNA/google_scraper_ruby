@@ -1,6 +1,10 @@
 = form_with url: keywords_path, method: :get, class: 'keywords-search' do |form|
-  p Search here...
-  .keywords-search__wrap
+  .keywords-search__wrap-details
+    p Search here...
+    .keywords-search__clear-filter-wrap
+      = link_to '', root_path, class: 'keywords-search__clear-filter'
+      span.keywords-search__clear-filter-text Clear Filters
+  .keywords-search__wrap-form
     = form.text_field :keyword, placeholder: 'Enter keyword here', class: 'keywords-search__search-field'
     = form.submit '', class: 'keywords-search__button'
 

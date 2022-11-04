@@ -13,13 +13,65 @@
     font-style: italic;
   }
 
-  &__wrap {
+  &__wrap-form {
     border-radius: rem(15px);
     background-color: $white-500;
 
     @include media-breakpoint-up(sm) {
       border-radius: rem(55px);
     }
+  }
+
+  &__wrap-details {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__clear-filter-wrap {
+    position: relative;
+
+    &:hover {
+      > span {
+        visibility: visible;
+        animation: jelly 0.5s;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__clear-filter {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+    transition: $basic-transition;
+    border: 3px solid $black-100;
+    border-radius: 50%;
+    border-radius: 50%;
+
+    &:hover {
+      border-color: $red;
+    }
+  }
+
+  &__clear-filter-text {
+    @include neumorphism-block;
+    visibility: hidden;
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    width: 90px;
+    padding: 5px;
+    transition: $basic-transition;
+    border-radius: 55px;
+    border-top-right-radius: 0;
+    opacity: 0;
+    background-color: $white-100;
+    color: $black-100;
+    font-size: rem(12px);
+    font-weight: 600;
+
+    text-align: center;
   }
 
   &__search-field {
