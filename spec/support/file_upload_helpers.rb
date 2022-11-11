@@ -10,7 +10,7 @@ module FileUploadHelpers
       else
         file = nil
       end
-      form = KeywordsForm.new(user: Fabricate(:user))
+      form = KeywordsForm.new(Fabricate(:user))
       form.save(file)
       form
     end

@@ -13,9 +13,9 @@ class KeywordsController < ApplicationController
   end
 
   def create
-    keywords_form ||= KeywordsForm.new(user: current_user)
+    keywords_form ||= KeywordsForm.new(current_user)
 
-    if keywords_form.save({ file: keyword_params, user: current_user })
+    if keywords_form.save({ file: keyword_params })
       flash[:notice] = t('csv.upload_success')
     else
       flash[:alert] = keywords_form.errors.full_messages.first
