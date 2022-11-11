@@ -2,84 +2,9 @@
   display: flex;
   justify-content: center;
 
-  &__top {
-    display: flex;
-    margin-top: 10%;
-
-    h1 {
-      text-transform: uppercase;
-    }
-
-    p {
-      color: $pink;
-      font-size: rem(24px);
-      font-weight: 200;
-    }
-
-    img {
-      width: rem(50px);
-    }
-  }
-
-  &__hero {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    margin-left: rem(40px);
-    padding-left: rem(40px);
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  &__line {
-    @include secondary-gradient-background;
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-  }
-
-  &__middle {
+  &__details {
     display: flex;
     flex-direction: column;
     margin-top: rem(60px);
-  }
-
-  &__user {
-    margin-bottom: rem(30px);
-
-    h3,
-    span {
-      font-size: rem(24px);
-      line-height: 1;
-    }
-
-    h3 {
-      margin-bottom: rem(10px);
-    }
-
-    span {
-      opacity: 0.8;
-      color: $primary;
-    }
-  }
-
-  &__logout {
-    margin-bottom: rem(40px);
-
-    form {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-      max-width: rem(100px);
-
-      button {
-        padding: 5px 0;
-      }
-    }
   }
 }
