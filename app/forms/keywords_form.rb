@@ -7,7 +7,7 @@ class KeywordsForm
 
   validates_with KeywordsFormValidator
 
-  attr_accessor :file, :user, :keywords
+  attr_accessor :file, :user, :keywords, :keyword_ids
 
   def initialize(user)
     @user = user
@@ -20,10 +20,11 @@ class KeywordsForm
 
     begin
       if parse_keywords(params[:file])
-        Keyword.transaction do
-          Keyword.create(parse_keywords_from_file(keywords)).pluck(:id)
+        @keyword_ids = Keyword.create(parse_keywords_from_file(keywords)).map do |keyword|
+          keyword['id']
         end
       end
+      assign_attributes(keyword_ids: @keyword_ids)
     rescue ActiveRecord::ActiveRecordError => e
       errors.add("Error: #{e}")
     end
