@@ -7,7 +7,7 @@ class SearchKeywordJob < ApplicationJob
     keyword = Keyword.find(keyword_id)
 
     begin
-      GoogleSearchService.new(keyword: keyword.keyword).call
+      GoogleSearchService.new(keyword.keyword).call
 
       keyword.update_status(:completed)
     rescue ActiveRecord::RecordNotFound, ActiveRecord::StatementInvalid

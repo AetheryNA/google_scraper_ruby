@@ -1,27 +1,29 @@
 # frozen_string_literal: true
 
-# frozen_string_literal = true
-
 RSpec.describe Keyword, type: :model do
-  describe '#model' do
-    context 'when model is updated' do
-      it 'status reads failed' do
+  describe '#update_status' do
+    context 'given status is failed' do
+      it 'updates the status' do
         keyword = Fabricate(:keyword)
 
         keyword.update_status(:failed)
 
         expect(keyword.status).to eq('failed')
       end
+    end
 
-      it 'status reads completed' do
+    context 'given the status is completed' do
+      it 'updates the status' do
         keyword = Fabricate(:keyword)
 
         keyword.update_status(:completed)
 
         expect(keyword.status).to eq('completed')
       end
+    end
 
-      it 'status reads in progress' do
+    context 'given the status is in progress' do
+      it 'updates the status' do
         keyword = Fabricate(:keyword)
 
         keyword.update_status(:in_progress)

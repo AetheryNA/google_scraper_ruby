@@ -10,7 +10,7 @@ class GoogleSearchService
   end
 
   def call
-    HTTParty.get(@url, { headers: { 'User-Agent' => user_agent } })
+    HTTParty.get(url, { headers: { 'User-Agent' => user_agent } })
   end
 
   private

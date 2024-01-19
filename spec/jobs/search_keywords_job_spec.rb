@@ -13,10 +13,10 @@ RSpec.describe SearchKeywordsJob, type: :job do
         expect { described_class.perform_later keyword_ids }.to have_enqueued_job(described_class)
       end
 
-      it 'queues 3 search keyword jobs' do
-        keyword_ids = Fabricate.times(3, :keyword).map(&:id)
+      it 'queues 2 search keyword jobs' do
+        keyword_ids = Fabricate.times(2, :keyword).map(&:id)
 
-        expect { described_class.perform_now keyword_ids }.to have_enqueued_job(SearchKeywordJob).exactly(:thrice)
+        expect { described_class.perform_now keyword_ids }.to have_enqueued_job(SearchKeywordJob).exactly(:twice)
       end
     end
   end
